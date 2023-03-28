@@ -1,0 +1,450 @@
+openapi: 3.0.0
+info:
+  title: Car Dealership API
+  version: 1.0.0
+  description: API for managing cars, customers, and orders at a car dealership
+servers:
+  - url: http://localhost:3008/api/
+paths:
+  /cars:
+    get:
+      summary: Returns a list of all electric cars in the dealership inventory
+      description: Returns a list of all electric cars currently available for sale in the dealership inventory
+      responses:
+        '200':
+          $ref: '#/components/responses/CarListResponse'
+    post:
+      summary: Adds a new electric car to the dealership inventory
+      description: Adds a new electric car to the dealership inventory with the specified details
+      requestBody:
+        description: Details of the new electric car to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        '201':
+          $ref: '#/components/responses/CarResponse'
+        '400':
+          description: Invalid input data provided
+  /cars/{id}:
+    get:
+      summary: Returns the details of a specific electric car identified by its ID
+      description: Returns the details of a specific electric car identified by its ID
+      parameters:
+        - in: path
+          name: id
+          description: ID of the electric car to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Electric car retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+        '404':
+          description: Electric car not found
+    put:
+      summary: Updates the details of a specific electric car identified by its ID
+      description: Updates the details of a specific electric car identified by its ID
+      parameters:
+        - in: path
+          name: id
+          description: ID of the electric car to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Updated details of the electric car
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        '200':
+          description: Electric car updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+        '400':
+          description: Invalid input data provided
+        '404':
+          description: Electric car not found
+    delete:
+      summary: Deletes a specific electric car identified by its ID
+      description: Deletes a specific electric car identified by its ID
+      parameters:
+        - in: path
+          name: id
+          description: ID of the electric car to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Electric car deleted successfully
+        '404':
+          description: Electric car not found
+  /charging-stations:
+    get:
+      summary: Returns a list of all electric car charging stations in the dealership's network
+      responses:
+        '200':
+          description: A list of electric car charging stations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChargingStation'
+    post:
+      summary: Adds a new electric car charging station to the dealership's network
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargingStation'
+      responses:
+        '201':
+          description: The newly created electric car charging station
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargingStation'
+        '400':
+          description: Invalid input
+        '409':
+          description: Charging station already exists
+  /customers:
+    get:
+      summary: Returns a list of all customers registered with the dealership.
+      operationId: getCustomers
+      responses:
+        '200':
+          $ref: '#/components/responses/CustomerListResponse'
+    post:
+      summary: Adds a new customer to the dealership's database.
+      operationId: addCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Customer created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+  /charging-stations/{id}:
+    get:
+      summary: Returns the details of a specific electric car charging station
+      parameters:
+        - in: path
+          name: id
+          description: ID of the charging station
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChargingStation"
+    put:
+      summary: Updates the details of a specific electric car charging station
+      parameters:
+        - in: path
+          name: id
+          description: ID of the charging station
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChargingStation"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChargingStation"
+    delete:
+      summary: Deletes a specific electric car charging station
+      parameters:
+        - in: path
+          name: id
+          description: ID of the charging station
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: No Content
+  /customers/{id}:
+    get:
+      summary: Returns the details of a specific customer identified by its id.
+      operationId: getCustomerById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the customer to retrieve.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Customer found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found.
+    put:
+      summary: Updates the details of a specific customer identified by its id.
+      operationId: updateCustomerById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the customer to update.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Customer updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found.
+    delete:
+      summary: Delete a customer
+      description: Deletes a specific customer identified by its id
+      operationId: deleteCustomer
+      parameters:
+        - name: id
+          in: path
+          description: ID of the customer to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Customer deleted successfully
+        '404':
+          description: Customer not found
+  /orders:
+    get:
+      summary: Retrieves a list of all orders
+      responses:
+        '200':
+          description: A list of orders
+    post:
+      summary: Creates a new order
+      responses:
+        '200':
+          description: Order created successfully
+  /orders/{id}:
+    get:
+      summary: Retrieves a specific order by ID
+      description: Returns the details of a specific order by its ID
+      parameters:
+        - in: path
+          name: id
+          description: ID of the order to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Order retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Order not found
+    put:
+      summary: Updates a specific order by ID
+      description: Updates the status of a specific order by its ID
+      parameters:
+        - in: path
+          name: id
+          description: ID of the order to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Updated order object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: Order updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Order not found
+    delete:
+      summary: Cancels a specific order by ID
+      description: Cancels a specific order by its ID
+      parameters:
+        - in: path
+          name: id
+          description: ID of the order to cancel
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Order canceled successfully
+        '404':
+          description: Order not found
+components:
+  schemas:
+    Car:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the electric car.
+        make:
+          type: string
+          description: The make of the electric car.
+        model:
+          type: string
+          description: The model of the electric car.
+        year:
+          type: integer
+          description: The year the electric car was manufactured.
+        range:
+          type: integer
+          description: The range of the electric car in miles.
+        price:
+          type: number
+          description: The price of the electric car in USD.
+        color:
+          type: string
+          description: The color of the electric car.
+    ChargingStation:
+      type: object
+      required:
+        - id
+        - name
+        - location
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the charging station
+        name:
+          type: string
+          description: Name of the charging station
+        location:
+          type: string
+          description: Location of the charging station
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the customer
+        name:
+          type: string
+          description: The name of the customer
+        email:
+          type: string
+          description: The email of the customer
+        phone:
+          type: string
+          description: The phone number of the customer
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the order
+        customer_id:
+          type: integer
+          description: ID of the customer who placed the order
+        car_id:
+          type: integer
+          description: ID of the car ordered
+        status:
+          type: string
+          enum:
+            - pending
+            - confirmed
+            - canceled
+          description: Status of the order
+  responses:
+    CarResponse:
+      description: The details of a specific electric car.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Car'
+    CarListResponse:
+      description: A list of electric cars.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Car'
+    ChargingStationResponse:
+      description: The requested charging station
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ChargingStation'
+    ChargingStationListResponse:
+      description: List of charging stations
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChargingStation'
+    CustomerListResponse:
+      description: List of customers
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Customer'
+    CustomerResponse:
+      description: The requested customer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Customer'
