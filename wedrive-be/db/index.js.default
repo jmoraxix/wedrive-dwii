@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 mongoose.
-    connect('mongodb+srv://wedrivedba:dqOod4pPBv1IDBbQ@wedrive-cl1.2za97up.mongodb.net/wedrive?retryWrites=true&w=majority', {
+    connect('mongodb+srv://user:passwd@server.mongodb.net/wedrive?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
