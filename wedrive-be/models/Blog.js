@@ -2,40 +2,38 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const blogSchema = new Schema({
-    title:  {
+    titulo:  {
       type: String,
       required: true,
     },
-    published: {
+    publicado: {
       type: Boolean,
       default: false,
     },
-    author: {
+    autor: {
       type: SchemaTypes.ObjectId,
-      ref: 'Usuario',
+      ref: 'Administrador',
       required: true,
     },
-    content: String,
-    tags: [String],
-    createdAt: {
+    contenido: String,
+    fechaCreado: {
       type: Date,
       default: () => Date.now(),
       immutable: true,
     },
-    updatedAt: Date,
-    comments: [{
+    fechaActualizado: Date,
+    comentarios: [{
       usuario: {
         type: SchemaTypes.ObjectId,
         ref: 'Usuario',
         required: true,
       },
-      content: String,
-      votes: Number
+      content: String
     }]
   });
 
 blogSchema.pre('save', function(next) {
-  this.updated = Date.now(); // update the date every time a blog post is saved
+  this.fechaActualizado = Date.now(); // Actualiza la fecha cada vez que se actualiza el blog
   next();
 });
 
