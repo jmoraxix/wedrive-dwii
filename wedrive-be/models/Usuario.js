@@ -28,6 +28,23 @@ const usuarioSchema = new Schema({
       default: () => Date.now(),
       immutable: true,
     },
+    nombre: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    primerApellido: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    segundoApellido: {
+        type: String,
+        trim: true,
+    },
+    fechaNacimiento: {
+      type: Date
+    },
 });
 
 const Usuario = model('Usuario', usuarioSchema);

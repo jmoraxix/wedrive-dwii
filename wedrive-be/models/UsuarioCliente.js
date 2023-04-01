@@ -2,20 +2,6 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const clienteSchema = new Schema({
-  nombre: {
-      type: String,
-      trim: true,
-      required: true,
-  },
-  primerApellido: {
-      type: String,
-      trim: true,
-      required: true,
-  },
-  segundoApellido: {
-      type: String,
-      trim: true,
-  },
   direccion: {
       type: String,
   },
@@ -23,9 +9,6 @@ const clienteSchema = new Schema({
     type: SchemaTypes.ObjectId,
     ref: 'Usuario',
     required: true,
-  },
-  fechaNacimiento: {
-    type: Date
   },
 });
 

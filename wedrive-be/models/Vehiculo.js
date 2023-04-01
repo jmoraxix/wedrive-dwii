@@ -25,8 +25,7 @@ const vehiculoSchema = new Schema({
     },
     estilo: {
       type: SchemaTypes.ObjectId,
-      ref: 'Estilo',
-      required: true,
+      ref: 'Estilo'
     },
     numPuertas: {
       type: Number,

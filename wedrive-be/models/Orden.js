@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
-const abastecedorSchema = new Schema({
+const ordenSchema = new Schema({
     cliente: {
       type: SchemaTypes.ObjectId,
       ref: 'Cliente',
@@ -19,5 +19,5 @@ const abastecedorSchema = new Schema({
     },
   });
 
-const Abastecedor = model('Abastecedor', abastecedorSchema);
-export default Abastecedor;
+const Orden = model('Orden', ordenSchema);
+export default Orden;

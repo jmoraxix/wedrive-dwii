@@ -8,8 +8,7 @@ const abastecedorSchema = new Schema({
     },
     puntosCarga: [{
       type: SchemaTypes.ObjectId,
-      ref: 'PuntoCarga',
-      required: true,
+      ref: 'PuntoCarga'
     }]
   });
 

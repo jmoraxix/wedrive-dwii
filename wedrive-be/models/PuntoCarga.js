@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const puntoCargaSchema = new Schema({
+    nombre:  {
+      type: String,
+      required: true,
+    },
     tipo:  {
       type: String,
       required: true,
