@@ -8,12 +8,12 @@ const usuarioSchema = new Schema({
         unique: true,
         required: true,
     },
-    contrasena: {
+    contrasenna: {
         type: String,
         trim: true,
         required: true,
     },
-    email: {
+    correo: {
       type: String,
       minLength: 10,
       required: true,
