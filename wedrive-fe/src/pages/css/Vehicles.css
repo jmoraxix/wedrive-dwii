@@ -1,0 +1,15 @@
+/* src/Component/Vehicles.css */
+.vehicles-container {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filters {
+  flex: 1 1 300px;
+  max-width: 300px;
+}
+
+.vehicles-for-sale {
+  flex: 3 1 0;
+}
