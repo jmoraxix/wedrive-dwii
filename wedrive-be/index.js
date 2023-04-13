@@ -4,6 +4,7 @@ const cors = require('cors')
 
 const db = require('./db')
 const usuarioRouter = require('./routes/usuario-router')
+const estiloRouter = require('./routes/estilo-router')
 
 const app = express()
 const apiPort = 3008
@@ -19,5 +20,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/usuario', usuarioRouter)
+app.use('/api/estilo', estiloRouter)
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
