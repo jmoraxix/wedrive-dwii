@@ -3,12 +3,12 @@ const { Schema, model } = mongoose;
 
 const ordenSchema = new Schema({
     cliente: {
-      type: SchemaTypes.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Cliente',
       required: true,
     },
     vehiculo: {
-      type: SchemaTypes.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Vehiculo',
       required: true,
     },

@@ -11,7 +11,7 @@ const blogSchema = new Schema({
       default: false,
     },
     autor: {
-      type: SchemaTypes.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Administrador',
       required: true,
     },
@@ -24,7 +24,7 @@ const blogSchema = new Schema({
     fechaActualizado: Date,
     comentarios: [{
       usuario: {
-        type: SchemaTypes.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Usuario',
         required: true,
       },

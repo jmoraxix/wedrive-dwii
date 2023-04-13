@@ -6,7 +6,7 @@ const clienteSchema = new Schema({
       type: String,
   },
   usuario: {
-    type: SchemaTypes.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Usuario',
     required: true,
   },

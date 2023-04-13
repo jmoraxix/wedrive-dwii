@@ -7,7 +7,7 @@ const vehiculoSchema = new Schema({
       required: true,
     },
     marca: {
-      type: SchemaTypes.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Marca',
       required: true,
     },
@@ -24,7 +24,7 @@ const vehiculoSchema = new Schema({
       required: true,
     },
     estilo: {
-      type: SchemaTypes.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Estilo'
     },
     numPuertas: {

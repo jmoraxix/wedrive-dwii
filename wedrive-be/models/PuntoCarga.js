@@ -17,12 +17,7 @@ const puntoCargaSchema = new Schema({
     kiloWatts: {
       type: Number,
       required: true,
-    },
-    abastecedor: {
-      type: SchemaTypes.ObjectId,
-      ref: 'Abastecedor',
-      required: true,
-    },
+    }
   });
 
 const PuntoCarga = model('PuntoCarga', puntoCargaSchema);
