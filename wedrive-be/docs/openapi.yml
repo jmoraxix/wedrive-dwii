@@ -6,8 +6,173 @@ info:
 servers:
   - url: http://localhost:3008/api
 paths:
+  /abastecedor:
+    get:
+      summary: Genera una lista con todos los abastecedores
+      responses:
+        '200':
+          description: Lista de abastecedores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Abastecedor'
+    post:
+      summary: Crea un nuevo abastecedor
+      responses:
+        '200':
+          description: Abastecedor creado exitosamente
+      requestBody:
+        description: Nuevo abastecedor
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Abastecedor'
+  /abastecedor/{id}:
+    get:
+      summary: Consulta un abastecedor por ID
+      parameters:
+        - in: path
+          name: id
+          description: ID of the order to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Abastecedor consultado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Abastecedor'
+        '404':
+          description: Order not found
+    put:
+      summary: Actualiza un abastecedor por ID
+      parameters:
+        - in: path
+          name: id
+          description: ID of the order to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated order object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Abastecedor'
+      responses:
+        '200':
+          description: Abastecedor actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Abastecedor'
+        '404':
+          description: Abastecedor no encontrado
+    delete:
+      summary: Elimina abastecedor por ID
+      parameters: 
+        - in: path
+          name: id
+          description: ID of the order to cancel
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order canceled successfully
+        '404':
+          description: Abastecedor no encontrado
+  /blog:
+    get:
+      summary: Genera una lista con todos los blogs
+      responses:
+        '200':
+          description: Lista de blogs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Blog'
+    post:
+      summary: Crea un nuevo blog
+      responses:
+        '200':
+          description: Blog creado exitosamente
+      requestBody:
+        description: Nuevo blog
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Blog'
+  /blog/{id}:
+    get:
+      summary: Consulta un blog por ID
+      parameters:
+        - in: path
+          name: id
+          description: ID del blog a consultar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Blog consultado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blog'
+        '404':
+          description: Blog no encontrado
+    put:
+      summary: Actualiza un blog por ID
+      parameters:
+        - in: path
+          name: id
+          description: ID del blog a actualizar
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Campos del blog a actualizar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Blog'
+      responses:
+        '200':
+          description: Blog actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blog'
+        '404':
+          description: Blog no encontrado
+    delete:
+      summary: Elimina blog por ID
+      parameters: 
+        - in: path
+          name: id
+          description: ID del blog
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Blog eliminado exitosamente
+        '404':
+          description: Blog no encontrado
   /estilo:
     get:
+      summary: Genera una lista con todos los estilos
       responses:
         '200':
           description: Lista de estilos
@@ -48,7 +213,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Estilo'
         '404':
-          description: Order not found
+          description: Estilo no encontrado
     put:
       summary: Updates a specific order by ID
       description: Updates the status of a specific order by its ID
@@ -74,7 +239,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Estilo'
         '404':
-          description: Marca not found
+          description: Objeto no encontrado
     delete:
       summary: Cancels a specific order by ID
       description: Cancels a specific order by its ID
@@ -89,10 +254,10 @@ paths:
         '200':
           description: Order canceled successfully
         '404':
-          description: Order not found
+          description: Objeto no encontrado
   /marca:
     get:
-      summary: Retrieves a list of all orders
+      summary: Genera una lista con todas los marcas
       responses:
         '200':
           description: A list of orders
@@ -126,7 +291,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Marca'
         '404':
-          description: Order not found
+          description: Objeto no encontrado
     put:
       summary: Updates a specific order by ID
       description: Updates the status of a specific order by its ID
@@ -152,7 +317,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Marca'
         '404':
-          description: Marca not found
+          description: Objeto no encontrado
     delete:
       summary: Cancels a specific order by ID
       description: Cancels a specific order by its ID
@@ -167,10 +332,10 @@ paths:
         '200':
           description: Order canceled successfully
         '404':
-          description: Order not found
+          description: Objeto no encontrado
   /orden:
     get:
-      summary: Retrieves a list of all orders
+      summary: Genera una lista con todas los ordenes
       responses:
         '200':
           description: A list of orders
@@ -204,7 +369,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Orden'
         '404':
-          description: Order not found
+          description: Objeto no encontrado
     put:
       summary: Updates a specific order by ID
       description: Updates the status of a specific order by its ID
@@ -230,7 +395,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Orden'
         '404':
-          description: Order not found
+          description: Objeto no encontrado
     delete:
       summary: Cancels a specific order by ID
       description: Cancels a specific order by its ID
@@ -245,10 +410,10 @@ paths:
         '200':
           description: Order canceled successfully
         '404':
-          description: Order not found
+          description: Objeto no encontrado
   /punto-carga:
     get:
-      summary: Returns a list of all electric car charging stations in the dealership's network
+      summary: Genera una lista con todos los puntos de carga
       responses:
         '200':
           description: A list of electric car charging stations
@@ -326,7 +491,7 @@ paths:
           description: No Content
   /usuario:
     get:
-      summary: Returns a list of all customers registered with the dealership.
+      summary: Genera una lista con todos los usuarios
       operationId: getCustomers
       responses:
         200:
@@ -378,7 +543,7 @@ paths:
                 discriminator:
                   propertyName: tipo_usuario
         '404':
-          description: Customer not found.
+          description: Objeto no encontrado
     put:
       summary: Updates the details of a specific customer identified by its id.
       operationId: updateCustomerById
@@ -403,7 +568,7 @@ paths:
         '200':
           description: Customer updated successfully.
         '404':
-          description: Customer not found.
+          description: Objeto no encontrado
     delete:
       summary: Delete a customer
       description: Deletes a specific customer identified by its id
@@ -419,11 +584,10 @@ paths:
         '204':
           description: Customer deleted successfully
         '404':
-          description: Customer not found
+          description: Objeto no encontrado
   /vehiculo:
     get:
-      summary: Returns a list of all electric cars in the dealership inventory
-      description: Returns a list of all electric cars currently available for sale in the dealership inventory
+      summary: Genera una lista con todos los automoviles electricos registrados
       responses:
         '200':
           description: OK
@@ -465,7 +629,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Vehiculo'
         '404':
-          description: Electric car not found
+          description: Objeto no encontrado
     put:
       summary: Updates the details of a specific electric car identified by its ID
       description: Updates the details of a specific electric car identified by its ID
@@ -493,7 +657,7 @@ paths:
         '400':
           description: Invalid input data provided
         '404':
-          description: Electric car not found
+          description: Objeto no encontrado
     delete:
       summary: Deletes a specific electric car identified by its ID
       description: Deletes a specific electric car identified by its ID
@@ -508,7 +672,7 @@ paths:
         '204':
           description: Electric car deleted successfully
         '404':
-          description: Electric car not found
+          description: Objeto no encontrado
 components:
   schemas:
     Abastecedor:
@@ -526,6 +690,30 @@ components:
             _id:
               type: string
             rol:
+              type: string
+    Blog:
+      type: object
+      properties:
+        _id:
+          type: string
+        titulo:
+          type: string
+        publicado:
+          type: string
+        autor:
+          type: string
+        contenido:
+          type: string
+        fechaCreado:
+          type: string
+        fechaActualizado:
+          type: string
+        comentarios:
+          type: object
+          properties:
+            usuario: 
+              type: string
+            contenido: 
               type: string
     Cliente:
       allOf:
