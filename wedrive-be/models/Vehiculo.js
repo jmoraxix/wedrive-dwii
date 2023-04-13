@@ -38,4 +38,4 @@ const vehiculoSchema = new Schema({
   });
 
 const Vehiculo = model('Vehiculo', vehiculoSchema);
-export default Vehiculo;
+module.exports = Vehiculo;

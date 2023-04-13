@@ -38,4 +38,4 @@ blogSchema.pre('save', function(next) {
 });
 
 const Blog = model('Blog', blogSchema);
-export default Blog;
+module.exports = Blog;

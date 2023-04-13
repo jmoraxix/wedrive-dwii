@@ -9,4 +9,4 @@ const marcaSchema = new Schema({
   });
 
 const Marca = model('Marca', marcaSchema);
-export default Marca;
+module.exports = Marca;

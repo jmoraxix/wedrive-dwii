@@ -13,4 +13,4 @@ const abastecedorSchema = new Schema({
   });
 
 const Abastecedor = model('Abastecedor', abastecedorSchema);
-export default Abastecedor;
+module.exports = Abastecedor;

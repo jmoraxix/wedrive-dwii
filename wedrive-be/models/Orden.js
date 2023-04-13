@@ -20,4 +20,4 @@ const ordenSchema = new Schema({
   });
 
 const Orden = model('Orden', ordenSchema);
-export default Orden;
+module.exports = Orden;

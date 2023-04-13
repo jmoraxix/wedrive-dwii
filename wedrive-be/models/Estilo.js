@@ -9,4 +9,4 @@ const estiloSchema = new Schema({
   });
 
 const Estilo = model('Estilo', estiloSchema);
-export default Estilo;
+module.exports = Estilo;

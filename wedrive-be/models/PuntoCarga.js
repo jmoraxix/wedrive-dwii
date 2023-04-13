@@ -26,4 +26,4 @@ const puntoCargaSchema = new Schema({
   });
 
 const PuntoCarga = model('PuntoCarga', puntoCargaSchema);
-export default PuntoCarga;
+module.exports = PuntoCarga;
