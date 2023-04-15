@@ -1,12 +1,67 @@
 // src/Component/Navbar.js
 import React from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Container, Modal, Button, Form, FormControl, FormGroup, FormLabel, FormCheck } from 'react-bootstrap';
+import { GoogleLogin } from 'react-google-login';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../logo.svg'; // Asegúrate de tener un archivo logo.svg en la carpeta "src"
 
+
+
+
 const NavbarComponent = () => {
+  const [showLoginModal, setShowLoginModal] = React.useState(false);
+
+  const handleCloseLoginModal = () => setShowLoginModal(false);
+  const handleShowLoginModal = () => setShowLoginModal(true);
+
+  const responseGoogle = (response) => {
+  console.log(response);
+  // Aquí puedes manejar la autenticación con Google
+};
+const loginModal = (
+  <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
+    <Modal.Header closeButton>
+      <Modal.Title>Iniciar sesión</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <Form>
+        <FormGroup controlId="email">
+          <FormLabel>Email</FormLabel>
+          <FormControl type="email" placeholder="Ingresa tu email" />
+        </FormGroup>
+        <FormGroup controlId="password">
+          <FormLabel>Contraseña</FormLabel>
+          <FormControl type="password" placeholder="Ingresa tu contraseña" />
+        </FormGroup>
+        <FormGroup controlId="rememberMe" className="d-flex justify-content-between">
+          <FormCheck type="checkbox" label="Recordarme" />
+          <Button variant="link" onClick={() => {}}>Olvidé mi contraseña</Button>
+        </FormGroup>
+        <Button variant="primary" type="submit">
+          Ingresar
+        </Button>
+        <Button variant="secondary" className="ml-2" onClick={() => {}}>
+          Crear cuenta
+        </Button>
+      </Form>
+      <hr />
+      <div className="d-flex justify-content-around">
+        <GoogleLogin
+          clientId="YOUR_GOOGLE_CLIENT_ID"
+          buttonText="Ingresar con Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
+        <Button variant="primary">
+          <i className="fa fa-facebook-official" aria-hidden="true"></i> Ingresar con Facebook
+        </Button>
+      </div>
+    </Modal.Body>
+  </Modal>
+);
   return (
     <Navbar bg="light" expand="lg" fixed="top">
       <Navbar.Brand href="/">
@@ -32,7 +87,7 @@ const NavbarComponent = () => {
             </NavLink>
           </Nav.Item>
           <Nav.Item>
-            <NavLink className="nav-link" to="/abastecedores" activeClassName="active">
+            <NavLink className="nav-link" to="/suppliers" activeClassName="active">
               Abastecedores
             </NavLink>
           </Nav.Item>
@@ -58,5 +113,7 @@ const NavbarComponent = () => {
     </Navbar>
   );
 };
+
+
 
 export default NavbarComponent;
